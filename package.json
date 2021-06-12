@@ -4,12 +4,17 @@
   "description": "",
   "main": "/js/app.js",
   "scripts": {
-    "start": "http-server -c-1",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack --config webpack.config.js && http-server -c-1"
   },
   "author": "Raphael Giagnorio",
   "license": "ISC",
   "dependencies": {
-    "http-server": "^0.12.3"
+    "gsap": "^3.6.1",
+    "http-server": "^0.12.3",
+    "three": "^0.129.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.2"
   }
 }

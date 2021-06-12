@@ -1,3 +1,7 @@
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { gsap } from "gsap";
+
 const container = document.body;
 
 /**
@@ -51,11 +55,15 @@ class CustomSceneObject {
 
   appear() {
     this.sphere.material.opacity = 0;
-    TweenLite.to(this.sphere.material, 1, { opacity: 1 });
+    gsap.to(this.sphere.material, {
+      duraction: 1,
+      opacity: 1
+    });
 
     this.sprites.forEach((sprite) => {
       sprite.scale.set(0, 0, 0);
-      TweenLite.to(sprite.scale, 1, {
+      gsap.to(sprite.scale, {
+        duration: 1,
         x: 1,
         y: 1,
         z: 1
@@ -64,7 +72,8 @@ class CustomSceneObject {
   }
 
   destroy() {
-    TweenLite.to(this.sphere.material, 1, {
+    gsap.to(this.sphere.material, {
+      duration: 1,
       opacity: 0,
       onComplete: () => {
         this.scene.remove(this.sphere);
@@ -72,7 +81,8 @@ class CustomSceneObject {
     });
 
     this.sprites.forEach((sprite) => {
-      TweenLite.to(sprite.scale, 1, {
+      gsap.to(sprite.scale, {
+        duration: 1,
         x: 0,
         y: 0,
         z: 0,
@@ -121,7 +131,7 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 container.appendChild(renderer.domElement);
 
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
+const controls = new OrbitControls(camera, renderer.domElement);
 controls.rotateSpeed = 0.35;
 camera.position.set(-1, 0, 0);
 controls.update();
